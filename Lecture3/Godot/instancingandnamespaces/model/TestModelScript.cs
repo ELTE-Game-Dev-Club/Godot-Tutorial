@@ -1,15 +1,19 @@
 using Godot;
 using System;
 
-public partial class TestModelScript : Node
+namespace Lecture3.Model
 {
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
+	public partial class TestModelScript
 	{
-	}
+		Vector2 _velocity;
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
+		public Rect2 Bounds { get; set; } = new Rect2(-8.0f, 0.0f, 16.0f, 1.5f);
+		public Vector3 Position { get; set; } = Vector3.Zero;
+		public float Speed { get; set; } = 10.0f;
+
+		public TestModelScript()
+		{
+			_velocity = Vector2.Zero;
+		}
 	}
 }
