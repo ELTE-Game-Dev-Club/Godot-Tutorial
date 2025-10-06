@@ -46,7 +46,6 @@ public partial class ProjectileViewModel : Node3D
         Model.Propagate((float)delta);
         //this.LookAt(Model.Velocity.Normalized(),Vector3.Up);
         this.SetPosition(Model.Position);
-        GD.Print(Model.Position);
     }
     
 }
