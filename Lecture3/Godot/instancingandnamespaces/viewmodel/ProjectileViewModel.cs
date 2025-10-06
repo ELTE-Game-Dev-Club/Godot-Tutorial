@@ -21,6 +21,11 @@ public partial class ProjectileViewModel : Node3D
         }
     }
 
+    /// <summary>
+    /// Event handler function. We use this to react to changes in the view-model by "subscribing" to the public event that will be invoked in the model. 
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     public void OnActiveChanged(object sender, EventArgs e)
     {
         if (!Model.Active)
@@ -44,7 +49,6 @@ public partial class ProjectileViewModel : Node3D
             return;
         
         Model.Propagate((float)delta);
-        //this.LookAt(Model.Velocity.Normalized(),Vector3.Up);
         this.SetPosition(Model.Position);
     }
     

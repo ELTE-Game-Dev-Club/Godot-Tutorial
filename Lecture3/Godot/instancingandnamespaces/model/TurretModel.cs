@@ -13,16 +13,11 @@ public class TurretModel
     
     public Vector3 Position { get; set; }
     
-    public TurretModel()
-    {
-        
-    }
 
-    public void OnActiveChanged()
-    {
-        
-    }
-
+    /// <summary>
+    /// Responsible for creating the projectiles using the current state of the turret.
+    /// </summary>
+    /// <returns></returns>
     public ProjectileModel FireProjectiles()
     {
         var projectile = new ProjectileModel(this.Position,Facing,Projectile);
