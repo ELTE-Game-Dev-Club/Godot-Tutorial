@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://s1yh6hvk6sdu"]
+
+[ext_resource type="Script" uid="uid://cjx0wl7n1mlb2" path="res://viewmodel/ProjectileViewModel.cs" id="1_7ev7b"]
+[ext_resource type="ArrayMesh" uid="uid://bguc187qenmav" path="res://assets/Rocket.obj" id="2_jr3fo"]
+
+[node name="ProjectileNode3D" type="Node3D" node_paths=PackedStringArray("Lifetime")]
+script = ExtResource("1_7ev7b")
+Lifetime = NodePath("Timer")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+mesh = ExtResource("2_jr3fo")
+skeleton = NodePath("")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true

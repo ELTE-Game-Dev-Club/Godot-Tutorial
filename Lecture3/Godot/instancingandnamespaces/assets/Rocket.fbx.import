@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://c847x0qu6rkqj"
-path="res://.godot/imported/smile.fbx-a34cb38b393d179ec3f12c6f786ebf42.scn"
+uid="uid://dxoud2c3occe6"
+path="res://.godot/imported/Rocket.fbx-1d0c70e2b18b1bb1119b764861356df1.scn"
 
 [deps]
 
-source_file="res://assets/smile.fbx"
-dest_files=["res://.godot/imported/smile.fbx-a34cb38b393d179ec3f12c6f786ebf42.scn"]
+source_file="res://assets/Rocket.fbx"
+dest_files=["res://.godot/imported/Rocket.fbx-1d0c70e2b18b1bb1119b764861356df1.scn"]
 
 [params]
 
