@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://s1yh6hvk6sdu"]
+[gd_scene load_steps=4 format=3 uid="uid://s1yh6hvk6sdu"]
 
 [ext_resource type="Script" uid="uid://cjx0wl7n1mlb2" path="res://viewmodel/ProjectileViewModel.cs" id="1_7ev7b"]
 [ext_resource type="ArrayMesh" uid="uid://bguc187qenmav" path="res://assets/Rocket.obj" id="2_jr3fo"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7ev7b"]
+size = Vector3(0.256836, 0.292725, 0.67749)
 
 [node name="ProjectileNode3D" type="Node3D" node_paths=PackedStringArray("Lifetime")]
 script = ExtResource("1_7ev7b")
@@ -11,6 +14,13 @@ Lifetime = NodePath("Timer")
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
 mesh = ExtResource("2_jr3fo")
 skeleton = NodePath("")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+can_sleep = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+shape = SubResource("BoxShape3D_7ev7b")
+debug_color = Color(1, 0, 0, 0.419608)
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
