@@ -104,4 +104,3 @@ namespace Lecture3.View
 		}
 	}
 }
-
