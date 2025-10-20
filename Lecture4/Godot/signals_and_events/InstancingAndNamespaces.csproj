@@ -6,6 +6,7 @@
   <ItemGroup>
     <Content Include="view\demo_instatiation.tscn" />
     <Content Include="view\hull.tscn" />
+    <Content Include="view\interface.tscn" />
     <Content Include="view\projectile.tscn" />
   </ItemGroup>
 </Project>
