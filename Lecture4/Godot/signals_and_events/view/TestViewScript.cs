@@ -3,6 +3,7 @@ using System;
 
 using Lecture3.ViewModel;
 using Lecture3.Model;
+using System.Collections.Generic;
 
 namespace Lecture3.View
 {
@@ -12,6 +13,9 @@ namespace Lecture3.View
 		private TestModelScript _model;
 		private Camera3D _camera;
 		private Node3D _player;
+
+		private List<Node3D> _invaders = new List<Node3D>();
+
 		[Export]
 		public float Speed
 		{
@@ -36,7 +40,20 @@ namespace Lecture3.View
 			_camera = GetNode<Camera3D>("Camera3D");
 			_player = GetNode<Node3D>("Player");
 
+			for (int i = 0; i < GetChildCount(); i++)
+			{
+				Node3D child = GetChild<Node3D>(i);
+				if (child.Name.Equals("Invader"))
+				{
+					_invaders.Add(child);
+				}
+			}
 			_model.Position = _player.Position;
+		}
+
+		private void OnPlayerHitboxBodyEntered(Node body)
+		{
+			GD.Print("Player hit by: " + body.Name);
 		}
 
 		public override void _PhysicsProcess(double delta)
@@ -87,4 +104,3 @@ namespace Lecture3.View
 		}
 	}
 }
-

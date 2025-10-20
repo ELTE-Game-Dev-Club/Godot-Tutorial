@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://c4yi1yalsko6"]
+
+[ext_resource type="PackedScene" uid="uid://c82e8bt5cn6bv" path="res://assets/ProjSpawner.glb" id="1_qnd3r"]
+[ext_resource type="Script" uid="uid://cn4cbn2sj7fjl" path="res://viewmodel/InvaderViewModel.cs" id="2_vx27u"]
+
+[node name="Invader" type="Node3D"]
+
+[node name="Hull" parent="." instance=ExtResource("1_qnd3r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.4)
+
+[node name="ProjSpawnPoint" type="Node3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 1.66569)
+script = ExtResource("2_vx27u")
+
+[node name="AttackTimer" type="Timer" parent="ProjSpawnPoint"]
+autostart = true
