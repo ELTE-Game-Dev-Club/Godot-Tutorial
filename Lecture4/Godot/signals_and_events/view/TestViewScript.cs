@@ -4,6 +4,7 @@ using System;
 using Lecture3.ViewModel;
 using Lecture3.Model;
 using System.Collections.Generic;
+using InstancingAndNamespaces.viewmodel;
 
 namespace Lecture3.View
 {
@@ -15,6 +16,8 @@ namespace Lecture3.View
 		private Node3D _player;
 
 		private List<Node3D> _invaders = new List<Node3D>();
+
+		public int Health = 10;
 
 		[Export]
 		public float Speed
@@ -39,23 +42,35 @@ namespace Lecture3.View
 
 			_camera = GetNode<Camera3D>("Camera3D");
 			_player = GetNode<Node3D>("Player");
+			
 
+			PlayerControl.Instance.Ship = this;
+			EmitSignal(SignalName.HealthChanged);
+			
+			
 			for (int i = 0; i < GetChildCount(); i++)
 			{
-				Node3D child = GetChild<Node3D>(i);
+				Node child = GetChild<Node>(i);
 				if (child.Name.Equals("Invader"))
 				{
-					_invaders.Add(child);
+					_invaders.Add((Node3D)child);
 				}
 			}
 			_model.Position = _player.Position;
+			
+			
 		}
 
 		private void OnPlayerHitboxBodyEntered(Node body)
 		{
 			GD.Print("Player hit by: " + body.Name);
+			this.Health--;
+			EmitSignal(SignalName.HealthChanged);
 		}
 
+		[Signal]
+		public delegate void HealthChangedEventHandler();
+		
 		public override void _PhysicsProcess(double delta)
 		{
 			// We create a local variable to store the input direction.

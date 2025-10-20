@@ -25,10 +25,11 @@ offset_bottom = -10.0
 grow_vertical = 0
 metadata/_edit_use_anchors_ = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer" node_paths=PackedStringArray("LivesLabel", "BombLabel")]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer" node_paths=PackedStringArray("HealthLabel", "LivesLabel", "BombLabel")]
 layout_mode = 2
 alignment = 1
 script = ExtResource("1_47far")
+HealthLabel = NodePath("HSplitContainer2/HealthAmountLabel")
 LivesLabel = NodePath("HSplitContainer/LivesAmountLabel")
 BombLabel = NodePath("HSplitContainer3/BombAmountLabel")
 

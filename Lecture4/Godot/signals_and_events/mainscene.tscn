@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://dnsbtkaaeikd3"]
+[gd_scene load_steps=9 format=3 uid="uid://dnsbtkaaeikd3"]
 
 [ext_resource type="PackedScene" uid="uid://c847x0qu6rkqj" path="res://assets/smile.fbx" id="1_di3le"]
 [ext_resource type="Script" uid="uid://bhdlrkc01sb41" path="res://view/TestViewScript.cs" id="2_54ro2"]
 [ext_resource type="PackedScene" uid="uid://c4yi1yalsko6" path="res://view/Invader.tscn" id="3_dn5c8"]
+[ext_resource type="PackedScene" uid="uid://crwff066x0xk2" path="res://view/interface.tscn" id="4_5lfti"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lwkc2"]
 sky_top_color = Color(0.192601, 0.453498, 0.749604, 1)
@@ -40,5 +41,9 @@ shape = SubResource("BoxShape3D_dn5c8")
 
 [node name="Invader" parent="." instance=ExtResource("3_dn5c8")]
 transform = Transform3D(0.4, 0, 0, 0, -1.74846e-08, -0.4, 0, 0.4, -1.74846e-08, 0, 11.8055, 0)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" parent="CanvasLayer" instance=ExtResource("4_5lfti")]
 
 [connection signal="body_entered" from="Player/PlayerHitbox" to="." method="OnPlayerHitboxBodyEntered"]
