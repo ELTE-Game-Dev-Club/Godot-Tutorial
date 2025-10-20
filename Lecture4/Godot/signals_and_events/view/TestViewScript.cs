@@ -38,16 +38,17 @@ namespace Lecture3.View
 			base._Ready();
 
 			_model = new TestModelScript();
+			_model.PositionChanged += OnPositionChanged;
 			_viewModel = new TestViewModelScript(_model);
 
 			_camera = GetNode<Camera3D>("Camera3D");
 			_player = GetNode<Node3D>("Player");
-			
+
 
 			PlayerControl.Instance.Ship = this;
 			EmitSignal(SignalName.HealthChanged);
-			
-			
+
+
 			for (int i = 0; i < GetChildCount(); i++)
 			{
 				Node child = GetChild<Node>(i);
@@ -57,8 +58,8 @@ namespace Lecture3.View
 				}
 			}
 			_model.Position = _player.Position;
-			
-			
+
+
 		}
 
 		private void OnPlayerHitboxBodyEntered(Node body)
@@ -71,6 +72,11 @@ namespace Lecture3.View
 		[Signal]
 		public delegate void HealthChangedEventHandler();
 		
+		public void OnPositionChanged(object sender, EventArgs e)
+		{
+			GD.Print("Player position changed!");
+		}
+
 		public override void _PhysicsProcess(double delta)
 		{
 			// We create a local variable to store the input direction.
