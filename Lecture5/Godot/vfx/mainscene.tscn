@@ -1,0 +1,50 @@
+[gd_scene load_steps=9 format=3 uid="uid://dnsbtkaaeikd3"]
+
+[ext_resource type="PackedScene" uid="uid://c847x0qu6rkqj" path="res://assets/smile.fbx" id="1_di3le"]
+[ext_resource type="Script" uid="uid://bhdlrkc01sb41" path="res://view/TestViewScript.cs" id="2_54ro2"]
+[ext_resource type="PackedScene" uid="uid://c4yi1yalsko6" path="res://view/Invader.tscn" id="3_dn5c8"]
+[ext_resource type="PackedScene" uid="uid://crwff066x0xk2" path="res://view/interface.tscn" id="4_5lfti"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lwkc2"]
+sky_top_color = Color(0.192601, 0.453498, 0.749604, 1)
+sky_horizon_color = Color(0.616985, 0.888224, 0.974136, 1)
+sky_curve = 0.067594
+ground_bottom_color = Color(0.28963, 0.248279, 0.200285, 1)
+ground_horizon_color = Color(0.731575, 0.641611, 0.49826, 1)
+
+[sub_resource type="Sky" id="Sky_85tb6"]
+sky_material = SubResource("ProceduralSkyMaterial_lwkc2")
+
+[sub_resource type="Environment" id="Environment_3atq4"]
+background_mode = 2
+sky = SubResource("Sky_85tb6")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dn5c8"]
+size = Vector3(1.71875, 1, 1.87695)
+
+[node name="Node3D" type="Node3D"]
+transform = Transform3D(0.99788, 0, 0, 0, 0.99788, 0, 0, 0, 0.99788, 0, 0, 0)
+script = ExtResource("2_54ro2")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1.00212, 0, 0, 0, 1.00212, 0, 0, 0, 1.00212, 0, 5.917, 10)
+environment = SubResource("Environment_3atq4")
+current = true
+
+[node name="Player" parent="." instance=ExtResource("1_di3le")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+
+[node name="PlayerHitbox" type="Area3D" parent="Player"]
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player/PlayerHitbox"]
+shape = SubResource("BoxShape3D_dn5c8")
+
+[node name="Invader" parent="." instance=ExtResource("3_dn5c8")]
+transform = Transform3D(0.4, 0, 0, 0, -1.74846e-08, -0.4, 0, 0.4, -1.74846e-08, 0, 11.8055, 0)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" parent="CanvasLayer" instance=ExtResource("4_5lfti")]
+
+[connection signal="body_entered" from="Player/PlayerHitbox" to="." method="OnPlayerHitboxBodyEntered"]

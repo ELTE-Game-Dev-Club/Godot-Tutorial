@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://ceafka4lea706"]
+
+[ext_resource type="PackedScene" uid="uid://ej8wgikst8bm" path="res://view/hull.tscn" id="1_c81ec"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="HullNode" parent="." instance=ExtResource("1_c81ec")]
+transform = Transform3D(-4.37114e-08, 1, 3.82137e-15, -4.37114e-08, 1.91069e-15, -1, -1, -4.37114e-08, 4.37114e-08, -8.08088, 0, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10.2569)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.997401, -0.0720545, 0, 0.0720545, 0.997401, 0, -0.359107, 7.27647)

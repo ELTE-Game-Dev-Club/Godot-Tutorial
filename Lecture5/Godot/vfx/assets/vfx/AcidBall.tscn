@@ -1,0 +1,126 @@
+[gd_scene load_steps=20 format=3 uid="uid://35n337lh578f"]
+
+[ext_resource type="Shader" uid="uid://d0ryhblxq4nic" path="res://assets/shaders/AcidBallConeShader.tres" id="1_j17n1"]
+[ext_resource type="ArrayMesh" uid="uid://b8hu53n7jl18h" path="res://assets/ConeMesh.obj" id="2_oyemy"]
+[ext_resource type="Shader" uid="uid://dktfrhos0xjdi" path="res://assets/shaders/AcidBallCore.tres" id="3_2vhus"]
+[ext_resource type="Shader" uid="uid://bwwxvwr2xnvr7" path="res://assets/shaders/AcidBallTrail.tres" id="4_altt7"]
+[ext_resource type="Texture2D" uid="uid://dxijfobyjl7fu" path="res://assets/Images/vfx/BubbleParticle.png" id="5_altt7"]
+
+[sub_resource type="Gradient" id="Gradient_dyt2g"]
+colors = PackedColorArray(0.781931, 0.892675, 0, 1, 0, 8.288, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_eqarh"]
+gradient = SubResource("Gradient_dyt2g")
+fill_from = Vector2(0, 1)
+fill_to = Vector2(0, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2vhus"]
+render_priority = 1
+shader = ExtResource("1_j17n1")
+shader_parameter/ColorParam = SubResource("GradientTexture2D_eqarh")
+shader_parameter/Speed = Vector2(0.03, 2)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dyt2g"]
+render_priority = 0
+shader = ExtResource("3_2vhus")
+shader_parameter/Color = Color(0.303, 3.315, 0.277, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_j17n1"]
+
+[sub_resource type="Gradient" id="Gradient_eqarh"]
+offsets = PackedFloat32Array(0.0819672, 0.544959, 0.836066, 1)
+colors = PackedColorArray(0, 4.419, 0.004, 0, 0.784314, 4.41961, 0.00392157, 1, 0, 6.63, 0.077, 1, 0, 4.419, 0.004, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_yi70h"]
+gradient = SubResource("Gradient_eqarh")
+use_hdr = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ehnyd"]
+render_priority = 0
+shader = ExtResource("4_altt7")
+shader_parameter/ColorParam = SubResource("GradientTexture1D_yi70h")
+shader_parameter/Speed = Vector2(2, 0)
+
+[sub_resource type="QuadMesh" id="QuadMesh_eywrt"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yi70h"]
+blend_mode = 1
+cull_mode = 2
+shading_mode = 0
+disable_ambient_light = true
+disable_fog = true
+vertex_color_use_as_albedo = true
+vertex_color_is_srgb = true
+albedo_color = Color(0.301961, 1, 0.0392157, 1)
+albedo_texture = ExtResource("5_altt7")
+albedo_texture_force_srgb = true
+billboard_mode = 1
+billboard_keep_scale = true
+
+[sub_resource type="Curve" id="Curve_ehnyd"]
+_limits = [0.0, 2.5, 0.0, 1.0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.356955, 1.2938), 12.49, 12.49, 0, 0, Vector2(0.67979, 2.5), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_altt7"]
+curve = SubResource("Curve_ehnyd")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_altt7"]
+emission_shape = 2
+emission_sphere_radius = 0.4
+inherit_velocity_ratio = 0.7
+direction = Vector3(-1, 0, 0)
+spread = 10.0
+initial_velocity_min = 1.0
+initial_velocity_max = 3.0
+radial_velocity_min = 0.499978
+radial_velocity_max = 1.99998
+gravity = Vector3(0, 0, 0)
+scale_max = 1.5
+scale_curve = SubResource("CurveTexture_altt7")
+color = Color(0.74, 2, 0.71, 1)
+turbulence_noise_scale = 0.0
+turbulence_influence_min = 0.0
+turbulence_influence_max = 0.044
+turbulence_initial_displacement_min = 1.49012e-06
+turbulence_initial_displacement_max = 1.49012e-06
+
+[sub_resource type="QuadMesh" id="QuadMesh_v3fpn"]
+size = Vector2(0.1, 0.1)
+
+[node name="AcidBall" type="Node3D"]
+
+[node name="ConeMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1.41672, -0.00721943, 0.00567198)
+material_override = SubResource("ShaderMaterial_2vhus")
+cast_shadow = 0
+mesh = ExtResource("2_oyemy")
+
+[node name="AcidCore" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, -0.00656635, 0, 0.00462031)
+material_override = SubResource("ShaderMaterial_dyt2g")
+mesh = SubResource("SphereMesh_j17n1")
+
+[node name="Trail" type="Node3D" parent="."]
+transform = Transform3D(0.74962, 0, 0, 0, 1, 0, 0, 0, 1, -0.125644, 0, 0)
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Trail"]
+transform = Transform3D(5.12333, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -2.5, 0, 0)
+material_override = SubResource("ShaderMaterial_ehnyd")
+mesh = SubResource("QuadMesh_eywrt")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Trail"]
+transform = Transform3D(5.12333, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, -2.50029, 8.58307e-06, -0.0147082)
+material_override = SubResource("ShaderMaterial_ehnyd")
+mesh = SubResource("QuadMesh_eywrt")
+
+[node name="Particles" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.174498, -0.00525427, -0.00583172)
+material_override = SubResource("StandardMaterial3D_yi70h")
+amount = 32
+lifetime = 0.6
+explosiveness = 0.16
+randomness = 0.15
+process_material = SubResource("ParticleProcessMaterial_altt7")
+draw_pass_1 = SubResource("QuadMesh_v3fpn")

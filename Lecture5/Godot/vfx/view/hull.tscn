@@ -1,0 +1,17 @@
+[gd_scene load_steps=5 format=3 uid="uid://ej8wgikst8bm"]
+
+[ext_resource type="Script" uid="uid://bo8r7d8gn48eu" path="res://viewmodel/HullViewModel.cs" id="1_tqctj"]
+[ext_resource type="Script" uid="uid://rbb2db1f2rqa" path="res://viewmodel/TurretViewModel.cs" id="2_16gp5"]
+[ext_resource type="Resource" uid="uid://djk6ll8x51kjo" path="res://resources/rocket.tres" id="3_t3khg"]
+[ext_resource type="PackedScene" uid="uid://c847x0qu6rkqj" path="res://assets/smile.fbx" id="4_ugqwl"]
+
+[node name="HullNode" type="Node3D" node_paths=PackedStringArray("TurretViewModel")]
+script = ExtResource("1_tqctj")
+TurretViewModel = NodePath("TurretNode")
+
+[node name="TurretNode" type="Node3D" parent="." node_paths=PackedStringArray("HullViewModel")]
+script = ExtResource("2_16gp5")
+HullViewModel = NodePath("..")
+Descriptor = ExtResource("3_t3khg")
+
+[node name="smile" parent="." instance=ExtResource("4_ugqwl")]

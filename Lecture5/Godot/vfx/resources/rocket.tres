@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ProjectileDescriptor" load_steps=2 format=3 uid="uid://djk6ll8x51kjo"]
+
+[ext_resource type="Script" uid="uid://bxgj04sd0i3rj" path="res://resources/ProjectileDescriptor.cs" id="1_70on3"]
+
+[resource]
+script = ExtResource("1_70on3")
+Damage = 10.0
+PropagationSpeed = 2.0
+PropagationAcceleration = 0.0
+Lifetime = 4.0
+metadata/_custom_type_script = "uid://bxgj04sd0i3rj"

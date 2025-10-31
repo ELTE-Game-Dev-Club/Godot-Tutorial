@@ -1,0 +1,84 @@
+[gd_scene load_steps=9 format=3 uid="uid://7ulwagygkom1"]
+
+[ext_resource type="Script" uid="uid://dyvqomtgqs2cx" path="res://assets/vfx/scripts/AcidImpactVFX.cs" id="1_552a2"]
+[ext_resource type="Texture2D" uid="uid://dxijfobyjl7fu" path="res://assets/Images/vfx/BubbleParticle.png" id="1_rrthb"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rrthb"]
+blend_mode = 1
+cull_mode = 2
+shading_mode = 0
+disable_ambient_light = true
+disable_fog = true
+vertex_color_use_as_albedo = true
+vertex_color_is_srgb = true
+albedo_color = Color(0.560784, 0.607843, 0.0392157, 1)
+albedo_texture = ExtResource("1_rrthb")
+billboard_mode = 1
+billboard_keep_scale = true
+
+[sub_resource type="Curve" id="Curve_552a2"]
+_limits = [0.0, 1.5, 0.0, 1.0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.251969, 0.795923), 3.8941, 3.8941, 0, 0, Vector2(0.782152, 1.5), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_eywrt"]
+curve = SubResource("Curve_552a2")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_dewgb"]
+gravity = Vector3(0, 0, 0)
+scale_min = 25.0
+scale_max = 50.0
+scale_curve = SubResource("CurveTexture_eywrt")
+color = Color(0.424, 1.2, 0.416, 1)
+hue_variation_min = -0.25
+hue_variation_max = 0.25
+turbulence_noise_scale = 0.0
+turbulence_influence_min = 0.0
+turbulence_influence_max = 0.044
+turbulence_initial_displacement_min = 1.49012e-06
+turbulence_initial_displacement_max = 1.49012e-06
+
+[sub_resource type="QuadMesh" id="QuadMesh_8wcwl"]
+size = Vector2(0.1, 0.1)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_rrthb"]
+radial_velocity_min = 0.299978
+radial_velocity_max = 0.999978
+gravity = Vector3(0, 0, 0)
+radial_accel_min = -0.500002
+radial_accel_max = 4.0
+scale_max = 5.0
+scale_curve = SubResource("CurveTexture_eywrt")
+color = Color(0.424, 1.2, 0.416, 1)
+hue_variation_min = -0.25
+hue_variation_max = 0.25
+turbulence_noise_scale = 0.0
+turbulence_influence_min = 0.0
+turbulence_influence_max = 0.044
+turbulence_initial_displacement_min = 1.49012e-06
+turbulence_initial_displacement_max = 1.49012e-06
+
+[node name="AcidImpact" type="Node3D"]
+script = ExtResource("1_552a2")
+
+[node name="Particles" type="GPUParticles3D" parent="."]
+material_override = SubResource("StandardMaterial3D_rrthb")
+amount = 1
+lifetime = 0.8
+explosiveness = 0.16
+randomness = 0.15
+process_material = SubResource("ParticleProcessMaterial_dewgb")
+draw_pass_1 = SubResource("QuadMesh_8wcwl")
+
+[node name="Particles2" type="GPUParticles3D" parent="."]
+material_override = SubResource("StandardMaterial3D_rrthb")
+amount = 16
+lifetime = 1.2
+explosiveness = 0.75
+randomness = 0.15
+process_material = SubResource("ParticleProcessMaterial_rrthb")
+draw_pass_1 = SubResource("QuadMesh_8wcwl")
+
+[node name="LifetimeTimer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
